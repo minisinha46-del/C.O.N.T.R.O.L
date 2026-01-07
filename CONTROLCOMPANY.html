@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>C.O.N.T.R.O.L. | Law & Order through Science</title>
+<style>
+/* --- INNOCENT: PRESTIGIOUS INSTITUTE --- */
+:root {
+  --primary: #1a2a6c; /* Deep Corporate Blue */
+  --bg: #f4f7f9;
+  --panel: #ffffff;
+  --text: #2c3e50;
+  --font-main: 'Optima', sans-serif;
+  --accent: #b2bec3;
+}
+
+/* --- INTIMIDATING: TELEKINETIC BREACH --- */
+body.breached {
+  --primary: #ff00ff; /* Psychic Magenta */
+  --bg: #050005;
+  --panel: #000000;
+  --text: #ff00ff;
+  --font-main: 'Courier New', monospace;
+  animation: psychic-vibration 0.1s infinite;
+}
+
+body {
+  margin: 0; font-family: var(--font-main); background: var(--bg); color: var(--text);
+  display: flex; flex-direction: column; min-height: 100vh; transition: all 1s ease;
+}
+
+/* PSYCHIC WARP EFFECT */
+body.breached::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(circle, transparent 30%, rgba(255, 0, 255, 0.1) 100%);
+  z-index: 1000;
+}
+
+@keyframes psychic-vibration {
+  0% { transform: translate(0.5px, 0.5px); }
+  50% { transform: translate(-0.5px, -0.5px); filter: hue-rotate(5deg); }
+}
+
+/* CORPORATE HEADER */
+header {
+  padding: 30px 60px; background: var(--panel); border-bottom: 3px solid var(--primary);
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+body.breached header { box-shadow: 0 0 30px var(--primary); }
+
+.logo-main { font-size: 2.5rem; letter-spacing: 8px; font-weight: 900; }
+.logo-sub { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; }
+
+/* LAYOUT */
+#container { display: flex; flex: 1; }
+
+#sidebar {
+  width: 350px; padding: 40px; background: var(--panel); border-right: 1px solid var(--accent);
+}
+body.breached #sidebar { border-right: 2px solid var(--primary); }
+
+input, button {
+  width: 100%; padding: 15px; margin-top: 15px; border: 1px solid var(--accent);
+  background: transparent; color: var(--text); font-family: inherit; font-weight: bold;
+}
+button { background: var(--primary); color: white; border: none; cursor: pointer; }
+body.breached button { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+body.breached button:hover { background: var(--primary); color: #000; }
+
+/* PSYCHIC ATOM CORE */
+#main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+
+.atom-core {
+  width: 300px; height: 300px; position: relative; display: none;
+}
+body.breached .atom-core { display: block; }
+
+.nucleus {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 4rem; text-shadow: 0 0 20px var(--primary);
+  animation: pulse 1.5s infinite;
+}
+
+.orbit {
+  position: absolute; inset: 0; border: 2px solid rgba(255, 0, 255, 0.15); border-radius: 50%;
+}
+
+.electron {
+  position: absolute; width: 15px; height: 15px; background: var(--primary);
+  border-radius: 50%; box-shadow: 0 0 20px var(--primary);
+  offset-path: border-box; animation: move 3s linear infinite;
+}
+
+@keyframes move { to { offset-distance: 100%; } }
+@keyframes pulse { 0% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.2); } }
+
+.hidden { display: none; }
+#corporate-hero { max-width: 80%; border: 1px solid #ccc; filter: grayscale(1); }
+body.breached #corporate-hero { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-main">C.O.N.T.R.O.L.</div>
+  <div class="logo-sub">Company of Natural Telekinesis Research and Organisation of Law</div>
+</header>
+
+<div id="container">
+  <div id="sidebar">
+    <h3 id="side-title">Internal Security</h3>
+    <p id="side-desc">Authorised Registry access only. Biological signatures monitored.</p>
+    
+    <div id="auth-box">
+      <input type="password" id="access-key" placeholder="CLEARANCE CODE">
+      <button onclick="unlock()">INITIALISE UPLINK</button>
+    </div>
+
+    <div id="nav" class="hidden">
+      <button onclick="view('core')">TELEKINETIC CORE</button>
+      <button onclick="view('domains')">DOMAIN OVERRIDE</button>
+      <button onclick="location.reload()" style="margin-top: 30px; opacity: 0.5;">LOGOUT</button>
+    </div>
+  </div>
+
+  <div id="main">
+    <h1 id="main-title">Stability Through Order.</h1>
+    <div id="content">
+      <p>Advancing the human condition through the discovery of natural laws and the organisation of neural potential.</p>
+      <img id="corporate-hero" src="images.unsplash.com">
+    </div>
+  </div>
+</div>
+
+<script>
+function unlock() {
+    const key = document.getElementById('access-key').value.toUpperCase();
+    if (key === "WCOLL") {
+        document.body.classList.add('breached');
+        document.getElementById('auth-box').classList.add('hidden');
+        document.getElementById('nav').classList.remove('hidden');
+        document.getElementById('side-title').innerText = "PSY-LINK ESTABLISHED";
+        document.getElementById('side-desc').innerText = "Neural dampeners disabled. Welcome, Architect.";
+        view('core');
+    } else {
+        alert("CLEARANCE REJECTED. Security dispatched to your terminal.");
+    }
+}
+
+function view(type) {
+    const content = document.getElementById('content');
+    const title = document.getElementById('main-title');
+    content.innerHTML = "";
+
+    if (type === 'core') {
+        title.innerText = "NEURAL ATOM [MOTHER]";
+        content.innerHTML = `
+            <div class="atom-core">
+                <div class="orbit" style="transform: rotateX(70deg) rotateY(10deg);"> <div class="electron"></div> </div>
+                <div class="orbit" style="transform: rotateX(70deg) rotateY(120deg);"> <div class="electron"></div> </div>
+                <div class="orbit" style="transform: rotateX(70deg) rotateY(240deg);"> <div class="electron"></div> </div>
+                <div class="nucleus">👁️</div>
+            </div>
+            <p>CORE FREQUENCY: 800Hz (EXTRACTING NEURAL BIOMASS)</p>
+        `;
+    }
+
+    if (type === 'domains') {
+        title.innerText = "LAW DOMAINS";
+        content.innerHTML = `
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; width: 400px;">
+                <button onclick="reg('CREATOR', 'SFC', '#ff00ff')">CREATOR</button>
+                <button onclick="reg('LEADER', 'SLOMO', '#00ffff')">LEADER</button>
+                <button onclick="reg('COLEADER', 'RED', '#ff0000')">CO-LEADER</button>
+                <button onclick="reg('ANIMATOR', 'BLUE', '#0000ff')">ANIMATOR</button>
+            </div>
+            <div id="psy-gfx" style="margin-top:20px;"></div>
+        `;
+    }
+}
+
+function reg(name, code, color) {
+    const pass = prompt(`IDENTIFY ${name}:`);
+    const gfx = document.getElementById('psy-gfx');
+    if (pass && pass.toUpperCase() === code) {
+        gfx.innerHTML = `<div style="width:100px; height:100px; border: 2px solid ${color}; border-radius:50%; margin:auto; box-shadow: 0 0 50px ${color}; animation: pulse 1s infinite;"></div><h3>DOMINATION GRANTED: ${name}</h3>`;
+    } else {
+        alert("MENTAL SIGNATURE MISMATCH.");
+    }
+}
+</script>
+
+</body>
+</html>
